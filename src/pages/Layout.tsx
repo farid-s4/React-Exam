@@ -1,11 +1,13 @@
 import { Outlet } from "react-router-dom";
 import landing_logo from "/public/landing_logo.jpg";
 import auth_logo from "/public/auth_logo.png";
+import resgister_logo from "/public/register_logo.png";
+
 function Layout() {
   return (
     <>
-      <header className="bg-gradient-to-r from-amber-900 to-amber-800 shadow-lg">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <header className="bg-gradient-to-r from-amber-950 to-amber-800 shadow-lg">
+        <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img
               src={landing_logo}
@@ -17,7 +19,11 @@ function Layout() {
             </span>
           </div>
 
-          <nav className="hidden md:flex gap-8 uppercase tracking-wider text-amber-50 font-serif hover:cursor-pointer items-center font-bold">
+          <nav
+            className="hidden md:flex gap-8 uppercase tracking-wider text-amber-50
+  font-sans font-semibold items-center cursor-pointer
+  [font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',Arial,sans-serif]"
+          >
             <a href="/" className="hover:text-white transition-colors">
               Home
             </a>
@@ -31,19 +37,43 @@ function Layout() {
               Favorites
             </a>
           </nav>
+
           <button
-            className="text-white
-          transition-colors hover:cursor-pointer"
+            className="
+    flex items-center gap-2
+    text-amber-50 font-sans font-medium
+    transition-colors hover:text-white cursor-pointer
+    [font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',Arial,sans-serif]
+  "
             onClick={() => {
               alert("Login functionality to be implemented");
             }}
           >
             <img
               src={auth_logo}
-              alt="aunthentication logo"
-              className="w-8 h-8 object-contain"
+              alt="authentication logo"
+              className="w-5 h-5 object-contain"
             />
             Login
+          </button>
+
+          <button
+            className="
+    flex items-center gap-2
+    text-amber-50 font-sans font-medium
+    transition-colors hover:text-white cursor-pointer
+    [font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',Arial,sans-serif]
+  "
+            onClick={() => {
+              alert("Register functionality to be implemented");
+            }}
+          >
+            <img
+              src={resgister_logo}
+              alt="registration logo"
+              className="w-5 h-5 object-contain"
+            />
+            Register
           </button>
         </div>
       </header>
@@ -52,7 +82,6 @@ function Layout() {
         <Outlet />
       </main>
 
-      <footer>© 2026</footer>
     </>
   );
 }
