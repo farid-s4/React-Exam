@@ -1,16 +1,23 @@
 import { Outlet } from "react-router-dom";
-import landing_logo from "/public/landing_logo.jpg";
-import auth_logo from "/public/auth_logo.png";
-import resgister_logo from "/public/register_logo.png";
-
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../context/AppContext";
 function Layout() {
+  const navigate = useNavigate();
+  const { isAuthenticated, user, logout } = useContext(AuthContext);
   return (
     <>
-      <header className="bg-gradient-to-r from-amber-950 to-amber-800 shadow-lg">
+      <header
+        className=" fixed top-0 w-full z-50
+  backdrop-blur-md
+  bg-gradient-to-r from-amber-950/70 to-amber-800/50
+  shadow-lg shadow-black/40
+  border-b border-white/10"
+      >
         <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img
-              src={landing_logo}
+              src="../public/landing_logo.jpg"
               alt="ZR Performance Logo"
               className="w-11 h-11 object-contain"
             />
@@ -27,61 +34,76 @@ function Layout() {
             <a href="/" className="hover:text-white transition-colors">
               Home
             </a>
-            <a href="/services" className="hover:text-white transition-colors">
-              Services
+            <a className="hover:text-white transition-colors" onClick={() => navigate("/basket")}>
+              Basket
             </a>
-            <a href="/contact" className="hover:text-white transition-colors">
-              Contact
-            </a>
-            <a href="/favorites" className="hover:text-white transition-colors">
+            <a className="hover:text-white transition-colors" onClick={() => navigate("/favorite")}>
               Favorites
             </a>
           </nav>
 
-          <button
-            className="
+          {!isAuthenticated && (
+            <button
+              className="
     flex items-center gap-2
     text-amber-50 font-sans font-medium
     transition-colors hover:text-white cursor-pointer
     [font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',Arial,sans-serif]
   "
-            onClick={() => {
-              alert("Login functionality to be implemented");
-            }}
-          >
-            <img
-              src={auth_logo}
-              alt="authentication logo"
-              className="w-5 h-5 object-contain"
-            />
-            Login
-          </button>
-
-          <button
-            className="
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              <img
+                src="../public/auth_logo.png"
+                alt="authentication logo"
+                className="w-5 h-5 object-contain"
+              />
+              Login
+            </button>
+          )}
+          {!isAuthenticated && (
+            <button
+              className="
     flex items-center gap-2
     text-amber-50 font-sans font-medium
     transition-colors hover:text-white cursor-pointer
     [font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',Arial,sans-serif]
   "
-            onClick={() => {
-              alert("Register functionality to be implemented");
-            }}
-          >
-            <img
-              src={resgister_logo}
-              alt="registration logo"
-              className="w-5 h-5 object-contain"
-            />
-            Register
-          </button>
+              onClick={() => {
+                navigate("/register");
+              }}
+            >
+              <img
+                src="../public/register_logo.png"
+                alt="registration logo"
+                className="w-5 h-5 object-contain"
+              />
+              Register
+            </button>
+          )}
+          {isAuthenticated && (
+            <button
+              onClick={logout}
+              className="flex items-center gap-2
+    text-amber-50 font-sans font-medium
+    transition-colors hover:text-white cursor-pointer
+    [font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',Arial,sans-serif]"
+            >
+              {user?.name}: Logout
+              <img
+                src="../public/logout_logo.png"
+                alt="logout logo"
+                className="w-5 h-5 object-contain"
+              />
+            </button>
+          )}
         </div>
       </header>
 
       <main>
         <Outlet />
       </main>
-
     </>
   );
 }
