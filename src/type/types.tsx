@@ -15,7 +15,11 @@ export interface CardType {
     imageUrl: string;
     userEmail: string;
 }
-export interface favoriteType {
+export interface FavoriteItem {
     user: User;
     product: CardType;
+}
+export interface BasketItem {
+    product: CardType;
+    quantity: number;
 }

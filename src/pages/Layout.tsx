@@ -4,7 +4,7 @@ import { useContext } from "react";
 import AuthContext from "../context/AppContext";
 function Layout() {
   const navigate = useNavigate();
-  const { isAuthenticated, user, logout } = useContext(AuthContext);
+  const { isAuthenticated, user, logout, basket, favorites } = useContext(AuthContext);
   return (
     <>
       <header
@@ -35,10 +35,10 @@ function Layout() {
               Home
             </a>
             <a className="hover:text-white transition-colors" onClick={() => navigate("/basket")}>
-              Basket
+              Basket  <span className="bg-black p-1 rounded-4xl">{basket.length}</span>
             </a>
             <a className="hover:text-white transition-colors" onClick={() => navigate("/favorite")}>
-              Favorites
+              Favorites <span className="bg-black p-1 rounded-4xl">{favorites.length}</span>
             </a>
           </nav>
 

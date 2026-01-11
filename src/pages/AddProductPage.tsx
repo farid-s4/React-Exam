@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import AuthContext from "../context/AppContext";
 
 function AddProductPage() {
   const { addproduct, user } = React.useContext(AuthContext);
 
-  const [title, setTitle] = React.useState("");
-  const [price, setPrice] = React.useState("");
-  const [imageUrl, setImageUrl] = React.useState("");
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   const addElemenetHandler = async (e: React.FormEvent) => {
     e.preventDefault();

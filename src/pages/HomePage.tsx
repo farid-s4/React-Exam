@@ -4,7 +4,7 @@ import AuthContext from "../context/AppContext";
 import type { CardType } from "../type/types";
 
 function HomePage() {
-  const { isAuthenticated, getProducts, user, deleteproduct, addtobasket } =
+  const { isAuthenticated, getProducts, user, deleteproduct, addToBasket, addToFavorite} =
     useContext(AuthContext);
   const [products, setProducts] = useState<CardType[]>([]);
 
@@ -23,8 +23,17 @@ function HomePage() {
     }
   };
 
-  const addToBasketHandler = () => {
-    alert("Added to basket!");
+  const addToBasketHandler = async (product: CardType) => {
+    addToBasket(product, user);
+  }
+  const addToFavoriteHandler = async (product: CardType) => {
+    const result = await addToFavorite(product, user!);
+    if (!result) {
+      alert("Failed to add to favorites.");
+    }
+    else {
+      alert("Added to favorites!");
+    }
   }
   return (
     <div
@@ -71,10 +80,10 @@ function HomePage() {
             >
               <div className="absolute top-2 left-0 right-0 z-20 flex justify-between px-2">
                 <button className="bg-amber-600/90 hover:bg-amber-500 text-white px-3 py-2 rounded-lg shadow-lg transition flex items-center gap-1">
-                  <span className="text-sm" onClick={addToBasketHandler}>Add to basket</span>
+                  <span className="text-sm" onClick={() => addToBasketHandler(p)}>Add to basket</span>
                 </button>
                 <button className="bg-red-600/90 hover:bg-red-500 text-white px-3 py-2 rounded-lg shadow-lg transition flex items-center gap-1">
-                  <span className="text-sm">♥</span>
+                  <span className="text-sm" onClick={() => addToFavoriteHandler(p)}>♥</span>
                 </button>
               </div>
               {user?.email === p.userEmail && (
@@ -87,7 +96,7 @@ function HomePage() {
                 >
                   <button
                     className="text-amber-300 hover:text-amber-100 text-sm px-3 py-1 bg-black/70 rounded hover:bg-black/90 transition"
-                    onClick={() => navigate("/edit-product")}
+                    onClick={() => navigate(`/edit-product/${p.id}`)}
                   >
                     Edit
                   </button>

@@ -1,10 +1,11 @@
 import React from "react";
-import type { CardType, User } from "../type/types";
+import type { BasketItem, CardType, FavoriteItem, User } from "../type/types";
 import type { AuthResult } from "../type/types";
 export interface AppContextType {
   user: User | null;
   isAuthenticated: boolean;
-  basktet: CardType[];
+  basket: BasketItem[];
+  favorites: FavoriteItem[];
   login: (email: string, password: string) => Promise<AuthResult>;
   register: (
     name: string,
@@ -19,8 +20,17 @@ export interface AppContextType {
     userEmail: string
   ) => Promise<boolean>;
   deleteproduct: (id: number) => Promise<boolean>;
-  addtobasket: (product: CardType) => void;
-  deleteinBasket: (productId: number) => void;
+  updateproduct: (
+    id: number,
+    title: string,
+    price: string,
+    imageUrl: string
+  ) => Promise<boolean>;
+  getProductById: (id: number) => Promise<CardType | null>;
+  addToBasket: (product: CardType, user: User | null) => Promise<boolean>;
+  deleteFromBasket: (productId: number) => void;
+  addToFavorite: (product: CardType, user: User) => Promise<boolean>;
+  deleteFromFavorite: (productId: number) => Promise<boolean>;
   getProducts: () => CardType[];
   logout: () => void;
 }

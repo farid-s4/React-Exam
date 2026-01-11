@@ -19,7 +19,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
-            <Route path="edit-product" element={<EditProductPage />} />
+            <Route path="edit-product/:id" element={<EditProductPage />} />
             <Route path="add-product" element={<AddProductPage />} />
             <Route path="favorite" element={<FavoritePage />} />
             <Route path="basket" element={<BasketPage />} />
