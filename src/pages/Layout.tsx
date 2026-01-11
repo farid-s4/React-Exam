@@ -17,7 +17,7 @@ function Layout() {
         <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img
-              src="../public/landing_logo.jpg"
+              src="/landing_logo.jpg"
               alt="ZR Performance Logo"
               className="w-11 h-11 object-contain"
             />
@@ -55,7 +55,7 @@ function Layout() {
               }}
             >
               <img
-                src="../public/auth_logo.png"
+                src="/auth_logo.png"
                 alt="authentication logo"
                 className="w-5 h-5 object-contain"
               />
@@ -75,7 +75,7 @@ function Layout() {
               }}
             >
               <img
-                src="../public/register_logo.png"
+                src="/register_logo.png"
                 alt="registration logo"
                 className="w-5 h-5 object-contain"
               />
@@ -92,7 +92,7 @@ function Layout() {
             >
               {user?.name}: Logout
               <img
-                src="../public/logout_logo.png"
+                src="/logout_logo.png"
                 alt="logout logo"
                 className="w-5 h-5 object-contain"
               />
